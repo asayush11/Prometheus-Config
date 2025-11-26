@@ -2,8 +2,10 @@ FROM prom/prometheus
 
 USER root
 
-# Install envsubst from gettext
-RUN apk add --no-cache gettext
+# Install envsubst
+RUN apt-get update \
+    && apt-get install -y gettext-base \
+    && apt-get clean
 
 # Copy template and entrypoint
 COPY prometheus.yml.template /etc/prometheus/prometheus.yml.template
